@@ -27,14 +27,15 @@ const _defaultDecks = {
   }
 }
 
+function defaultDecks() {
+  AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(_defaultDecks));
+  return _defaultDecks;   
+}
+
 // return all of the decks along with their titles, questions, and answers.
 export async function getDecks() {
   const decks = await AsyncStorage.getItem(DECKS_STORAGE_KEY);
-  if (decks === null) {
-    AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(_defaultDecks));
-    return _defaultDecks;    
-  }
-  return JSON.parse(decks);
+  return decks === null ? defaultDecks() : JSON.parse(decks); 
 }
 
 // take in a single id argument and return the deck associated with that id.
