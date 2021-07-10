@@ -44,6 +44,14 @@ export async function getDeck(id) {
   return decks[id];
 }
 
+// take in a single id argument and delete the deck associated with that id.
+export async function removeDeck(id) {
+  const decks = await getDecks();
+  decks[id] = undefined;
+  delete decks[id];
+  AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decks));
+}
+
 // take in a single title argument and add it to the decks.
 export async function saveDeckTitle(title) {
   return await AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
