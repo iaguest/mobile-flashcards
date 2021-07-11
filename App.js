@@ -1,24 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { getDecks } from './utils/api'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux';
+import reducer from './reducers'
+import Decks from './components/Decks'
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, View } from 'react-native';
 
 export default class App extends React.Component {
-  state = {
-    decks: null,
-  }
-  async componentDidMount() {
-    const decks = await getDecks();
-    this.setState((prevState) => ({
-      decks: decks
-    }));
-  }
   render() {
     return (
-      <View style={styles.container}>
-        <Text>{ JSON.stringify(this.state.decks) }</Text>
+      <Provider store={createStore(reducer)}>
         <StatusBar style="auto" />
-      </View>
+        <View style={styles.container}>
+          <Decks />
+        </View>
+      </Provider>
     );
   }
 }
