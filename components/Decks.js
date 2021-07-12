@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { getDecks } from '../utils/api'
 import { receiveDecks } from '../actions/index'
 import AppLoading from 'expo-app-loading'
+import { white } from '../colors'
 
 class Decks extends React.Component {
   state = {
@@ -23,10 +24,33 @@ class Decks extends React.Component {
     }
 
     return (
-      <Text>{JSON.stringify(this.props.decks)}</Text>
+      <View>
+        { Object.entries(this.props.decks).map(([key, value]) => (
+            <View key={key} style={styles.item}>
+              <Text style={styles.titleText}>{key}</Text>
+              <Text style={styles.numCardsText}>{value.questions.length} cards</Text>
+            </View>
+          ))
+        }
+      </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  item: {
+    flex: 1,
+    padding: 20,
+    margin: 20,
+    alignItems: 'center'
+  },
+  titleText: {
+    fontSize: 25
+  },
+  numCardsText: {
+    fontSize: 20
+  }
+})
 
 function mapStateToProps(decks) {
   return {
