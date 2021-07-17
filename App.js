@@ -33,18 +33,18 @@ export default class App extends React.Component {
               name="Decks"
               component={Decks}
               options={{
-                tabBarIcon: ({color, size}) => {
+                tabBarIcon: ({color, size}) => (
                   <MaterialCommunityIcons name="cards" size={size} color={color}/>
-                }
+                )
               }}
             />
             <Tab.Screen
               name="Add Deck"
               component={AddDeck}
               options={{
-                tabBarIcon: ({color, size}) => {
+                tabBarIcon: ({color, size}) => (
                   <AntDesign name="plus" size={size} color={color} />
-                }
+                )
               }}
             />
           </Tab.Navigator>
