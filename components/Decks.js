@@ -1,10 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { getDecks } from '../utils/api'
 import { receiveDecks } from '../actions/index'
 import AppLoading from 'expo-app-loading'
 import { white } from '../colors'
+
+function DeckItem({ name, numCards }) {
+  return (
+    <View style={styles.itemContainer}>
+      <Text style={styles.titleText}>{name}</Text>
+      <Text style={styles.numCardsText}>{numCards} cards</Text>
+    </View>    
+  );
+}
 
 class Decks extends React.Component {
   state = {
@@ -18,6 +27,13 @@ class Decks extends React.Component {
       ready: true
     }));
   }
+  renderItem({item}) {
+    return (
+      <DeckItem
+        name={item.title}
+        numCards={item.questions.length}
+        />);
+  }
   render() {
     if (!this.state.ready) {
       return <AppLoading />;
@@ -25,23 +41,20 @@ class Decks extends React.Component {
 
     return (
       <View>
-        { Object.entries(this.props.decks).map(([key, value]) => (
-            <View key={key} style={styles.item}>
-              <Text style={styles.titleText}>{key}</Text>
-              <Text style={styles.numCardsText}>{value.questions.length} cards</Text>
-            </View>
-          ))
-        }
+        <FlatList
+          data={this.props.deckItems}
+          renderItem={this.renderItem}
+          keyExtractor={item => item.title} />
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  item: {
+  itemContainer: {
     flex: 1,
-    padding: 20,
-    margin: 20,
+    padding: 0,
+     margin: 10,
     alignItems: 'center'
   },
   titleText: {
@@ -54,7 +67,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(decks) {
   return {
-    decks
+    deckItems: Object.values(decks)
   };
 }
 
