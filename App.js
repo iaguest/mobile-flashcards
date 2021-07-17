@@ -5,11 +5,21 @@ import reducer from './reducers'
 import AddDeck from './components/AddDeck';
 import Decks from './components/Decks'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, TabBarIOS, View } from 'react-native';
+import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
+import Constants from 'expo-constants'
+import { white } from './colors'
+
+function AppStatusBar({backgroundColor, ...props}) {
+  return (
+    <View style={{backgroundColor, height: Constants.statusBarHeight}}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    </View>
+  );
+}
 
 const Tab = createBottomTabNavigator();
 
@@ -17,7 +27,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={createStore(reducer)}>
-        <StatusBar style="auto" />
+        <AppStatusBar backgroundColor={white} barStyle='light-content'/>
         <NavigationContainer>
           <Tab.Navigator
             tabBarOptions={{
@@ -53,10 +63,3 @@ export default class App extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-});

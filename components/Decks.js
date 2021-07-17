@@ -4,7 +4,6 @@ import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { getDecks } from '../utils/api'
 import { receiveDecks } from '../actions/index'
 import AppLoading from 'expo-app-loading'
-import { white } from '../colors'
 
 function DeckItem({ name, numCards }) {
   return (
@@ -53,8 +52,7 @@ class Decks extends React.Component {
 const styles = StyleSheet.create({
   itemContainer: {
     flex: 1,
-    padding: 0,
-     margin: 10,
+    padding: 20,
     alignItems: 'center'
   },
   titleText: {

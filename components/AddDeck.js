@@ -13,16 +13,14 @@ class AddDeck extends Component {
   }
 }
 
-// TODO: Consolidate styles here with Decks
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    margin: 20,
-    alignItems: 'center'
+    padding: 20
   },
   titleText: {
-    fontSize: 25
+    fontSize: 25,
+    textAlign: 'center'
   },
 })
 
