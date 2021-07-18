@@ -1,9 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { FlatList, StyleSheet, View } from 'react-native';
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
 import { handleReceiveDecks } from '../actions/index'
 import AppLoading from 'expo-app-loading'
-import { DeckInfo } from './DeckInfo';
 
 class Decks extends React.Component {
   state = {
@@ -15,12 +20,15 @@ class Decks extends React.Component {
       ready: true
     }));
   }
-  renderItem({item}) {
+  renderItem({item}, navigation) {
     return (
-      <DeckInfo
-        name={item.title}
-        numCards={item.questions.length}
-        />);
+      <TouchableOpacity onPress={() => navigation.navigate('Deck', { id: item.title })}>
+        <View style={styles.itemContainer}>
+          <Text style={styles.titleText}>{item.title}</Text>
+          <Text style={styles.numCardsText}>{item.questions.length} cards</Text>
+        </View>
+      </TouchableOpacity>
+    );
   }
   render() {
     if (!this.state.ready) {
@@ -31,7 +39,7 @@ class Decks extends React.Component {
       <View>
         <FlatList
           data={this.props.deckItems}
-          renderItem={this.renderItem}
+          renderItem={ (e) => this.renderItem(e, this.props.navigation) }
           keyExtractor={item => item.title} />
       </View>
     );
@@ -58,4 +66,4 @@ function mapStateToProps(decks) {
   };
 }
 
-export default connect(mapStateToProps)(Decks)
+export default connect(mapStateToProps)(Decks);
