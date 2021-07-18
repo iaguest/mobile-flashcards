@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux'
 import {
   FlatList,
-  StyleSheet,
-  Text,
   TouchableOpacity,
   View
 } from 'react-native';
@@ -36,7 +34,7 @@ class Decks extends React.Component {
     return (
       <View>
         <FlatList
-          data={this.props.deckItems}
+          data={this.props.items}
           renderItem={ (e) => this.renderItem(e, this.props.navigation) }
           keyExtractor={item => item.title} />
       </View>
@@ -46,7 +44,7 @@ class Decks extends React.Component {
 
 function mapStateToProps(decks) {
   return {
-    deckItems: Object.values(decks)
+    items: Object.values(decks)
   };
 }
 
