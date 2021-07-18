@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import { addDeck } from '../actions'
+import { makeNewDeck } from '../utils/deckHelper'
+import { saveDeckTitle } from '../utils/api'
 import {
   StyleSheet,
   Text,
@@ -16,10 +18,14 @@ class AddDeck extends Component {
   handleTitleChange = (titleInput) => {
     this.setState((prevState) => ({
       titleInput,
-    }))
+    }));
   }
   handleCreateDeck = () => {
-    // TODO
+    this.props.dispatch(addDeck(makeNewDeck(this.state.titleInput)));
+    saveDeckTitle(this.state.titleInput);
+    this.setState((prevState) => ({
+      titleInput: '',
+    }));
   }
   render() {
     const { titleInput } = this.state;

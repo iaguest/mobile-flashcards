@@ -1,4 +1,5 @@
 import { AsyncStorage } from "react-native"
+import { makeNewDeck } from '../utils/deckHelper'
 
 export const DECKS_STORAGE_KEY = 'Mobile-Flashcards:decks'
 
@@ -54,9 +55,8 @@ export async function removeDeck(id) {
 
 // take in a single title argument and add it to the decks.
 export async function saveDeckTitle(title) {
-  return await AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
-    [title]: { title, questions: [] },
-  }))
+  const newEntry = makeNewDeck(title);
+  return await AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify(newEntry));
 }
 
 // take in two arguments, title and card, and will add the card to the list of questions for the deck with the associated title.
