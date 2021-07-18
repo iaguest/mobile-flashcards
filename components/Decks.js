@@ -1,17 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import { handleReceiveDecks } from '../actions/index'
 import AppLoading from 'expo-app-loading'
-
-function DeckItem({ name, numCards }) {
-  return (
-    <View style={styles.itemContainer}>
-      <Text style={styles.titleText}>{name}</Text>
-      <Text style={styles.numCardsText}>{numCards} cards</Text>
-    </View>    
-  );
-}
+import { DeckInfo } from './DeckInfo';
 
 class Decks extends React.Component {
   state = {
@@ -25,7 +17,7 @@ class Decks extends React.Component {
   }
   renderItem({item}) {
     return (
-      <DeckItem
+      <DeckInfo
         name={item.title}
         numCards={item.questions.length}
         />);
@@ -46,7 +38,7 @@ class Decks extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   itemContainer: {
     flex: 1,
     padding: 20,
