@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { FlatList, StyleSheet, Text, View } from 'react-native';
-import { getDecks } from '../utils/api'
-import { receiveDecks } from '../actions/index'
+import { handleReceiveDecks } from '../actions/index'
 import AppLoading from 'expo-app-loading'
 
 function DeckItem({ name, numCards }) {
@@ -19,9 +18,7 @@ class Decks extends React.Component {
     ready: false
   }
   async componentDidMount() {
-    const { dispatch } = this.props;
-    const decks = await getDecks();
-    dispatch(receiveDecks(decks));
+    this.props.dispatch(handleReceiveDecks());
     this.setState((prevState)=>({
       ready: true
     }));

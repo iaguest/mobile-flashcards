@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { addDeck } from '../actions'
+import { handleAddDeck } from '../actions'
 import { makeNewDeck } from '../utils/deckHelper'
 import { saveDeckTitle } from '../utils/api'
 import {
@@ -21,8 +21,8 @@ class AddDeck extends Component {
     }));
   }
   handleCreateDeck = () => {
-    this.props.dispatch(addDeck(makeNewDeck(this.state.titleInput)));
-    saveDeckTitle(this.state.titleInput);
+    const { dispatch } = this.props;
+    dispatch(handleAddDeck(makeNewDeck(this.state.titleInput)));
     this.setState((prevState) => ({
       titleInput: '',
     }));

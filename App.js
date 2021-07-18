@@ -12,6 +12,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import Constants from 'expo-constants'
 import { white } from './colors'
+import middleware from './middleware'
 
 function AppStatusBar({backgroundColor, ...props}) {
   return (
@@ -26,7 +27,7 @@ const Tab = createBottomTabNavigator();
 export default class App extends React.Component {
   render() {
     return (
-      <Provider store={createStore(reducer)}>
+      <Provider store={createStore(reducer, middleware)}>
         <AppStatusBar backgroundColor={white} barStyle='light-content'/>
         <NavigationContainer>
           <Tab.Navigator
