@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
+import { DeckInfo } from './DeckInfo'
 
 class Deck extends React.Component {
   setTitle = (title) => {
@@ -13,7 +14,7 @@ class Deck extends React.Component {
     const { deck } = this.props;
     return (
       <View>
-        <Text>{deck.title}</Text>
+        <DeckInfo name={deck.title} numCards={deck.questions.length}/>
       </View>
     );
   }

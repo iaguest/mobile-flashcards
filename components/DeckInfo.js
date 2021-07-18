@@ -1,6 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import { styles } from './Decks';
+import { StyleSheet, Text, View } from 'react-native';
 
 export function DeckInfo({ name, numCards }) {
   return (
@@ -10,3 +9,17 @@ export function DeckInfo({ name, numCards }) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  itemContainer: {
+    flex: 1,
+    padding: 20,
+    alignItems: 'center'
+  },
+  titleText: {
+    fontSize: 25
+  },
+  numCardsText: {
+    fontSize: 20
+  }
+})

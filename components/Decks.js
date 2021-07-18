@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { handleReceiveDecks } from '../actions/index'
 import AppLoading from 'expo-app-loading'
+import { DeckInfo } from './DeckInfo'
 
 class Decks extends React.Component {
   state = {
@@ -23,10 +24,7 @@ class Decks extends React.Component {
   renderItem({item}, navigation) {
     return (
       <TouchableOpacity onPress={() => navigation.navigate('Deck', { id: item.title })}>
-        <View style={styles.itemContainer}>
-          <Text style={styles.titleText}>{item.title}</Text>
-          <Text style={styles.numCardsText}>{item.questions.length} cards</Text>
-        </View>
+        <DeckInfo name={item.title} numCards={item.questions.length} />
       </TouchableOpacity>
     );
   }
@@ -45,20 +43,6 @@ class Decks extends React.Component {
     );
   }
 }
-
-export const styles = StyleSheet.create({
-  itemContainer: {
-    flex: 1,
-    padding: 20,
-    alignItems: 'center'
-  },
-  titleText: {
-    fontSize: 25
-  },
-  numCardsText: {
-    fontSize: 20
-  }
-})
 
 function mapStateToProps(decks) {
   return {
