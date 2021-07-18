@@ -1,8 +1,8 @@
-import { getDecks, saveDeckTitle } from '../utils/api'
+import { getDecks, saveDeckTitle, removeDeck } from '../utils/api'
 
 export const RECEIVE_DECKS = 'RECEIVE_DECKS';
 export const ADD_DECK = 'ADD_DECK';
-export const REMOVE_DECK = 'REMOVE_DECK';
+export const DELETE_DECK = 'DELETE_DECK';
 export const ADD_CARD = 'ADD_CARD';
 
 function receiveDecks(decks) {
@@ -33,11 +33,18 @@ export function handleAddDeck(deck) {
   };
 }
 
-export function removeDeck(id) {
+function deleteDeck(id) {
   return {
-    type: REMOVE_DECK,
+    type: DELETE_DECK,
     id
   }
+}
+
+export function handleDeleteDeck(id) {
+  return async (dispatch) => {
+    dispatch(deleteDeck(id));
+    removeDeck(id);
+  };
 }
 
 export function addCard(id, card) {
