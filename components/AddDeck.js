@@ -27,8 +27,12 @@ class AddDeck extends Component {
       titleInput: '',
     }));
   }
+  isCreateButtonEnabled = () => {
+    return this.state.titleInput;
+  }
   render() {
     const { titleInput } = this.state;
+    const isButtonEnabled = this.isCreateButtonEnabled();
     return (
       <View style={styles.container}>
         <Text style={styles.titleText}>What is the title of your new deck?</Text>
@@ -37,10 +41,13 @@ class AddDeck extends Component {
           style={styles.titleInput}
           onChangeText={this.handleTitleChange}
         />
-        <TouchableOpacity onPress={this.handleCreateDeck} style={styles.button}>
-          <Text style={styles.buttonText}>
-            Create Deck
-          </Text>
+        <TouchableOpacity
+          onPress={this.handleCreateDeck}
+          style={[styles.button, {opacity: (isButtonEnabled ? 1 : 0.5)}]}
+          disabled={!isButtonEnabled}>
+            <Text style={styles.buttonText}>
+              Create Deck
+            </Text>
         </TouchableOpacity>
       </View>
     );
