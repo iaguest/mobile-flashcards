@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { handleAddDeck } from '../actions'
 import { makeNewDeck } from '../utils/deckHelper'
-import { saveDeckTitle } from '../utils/api'
 import {
   StyleSheet,
   Text,
@@ -28,7 +27,10 @@ class AddDeck extends Component {
     }));
   }
   isCreateButtonEnabled = () => {
-    return this.state.titleInput;
+    return (
+      this.state.titleInput &&
+      !(this.props.titles.includes(this.state.titleInput))
+    );
   }
   render() {
     const { titleInput } = this.state;
@@ -85,4 +87,10 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect()(AddDeck);
+function mapStateToProps(decks) {
+  return {
+    titles: Object.values(decks).map((deck) => deck.title)
+  }
+}
+
+export default connect(mapStateToProps)(AddDeck);
