@@ -17,6 +17,14 @@ class Deck extends React.Component {
   componentDidMount(){
     this.setTitle(this.props.deck.title);
   }
+  shouldComponentUpdate(nextProps) {
+    return !!nextProps.deck;
+  }
+  deleteDeck = (id) => {
+    const { dispatch, navigation } = this.props;
+    dispatch(handleDeleteDeck(id));
+    navigation.goBack();
+  }
   render() {
     const { deck } = this.props;
     return (
@@ -32,7 +40,7 @@ class Deck extends React.Component {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
-          onPress={(e) => { this.props.dispatch(handleDeleteDeck(deck.title)); }}>
+          onPress={(e) => { this.deleteDeck(deck.title) }}>
             <Text style={styles.buttonText}>Delete Deck</Text>
         </TouchableOpacity>
       </View>
@@ -45,13 +53,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-around',
     padding: 20,
+    marginTop: 50,
     marginBottom: 90,
   },
   button: {
     backgroundColor: blue,
     padding: 10,
     marginTop: 20,
-    marginBottom: 20,
     marginLeft: 50,
     marginRight: 50, 
     justifyContent: 'center',
