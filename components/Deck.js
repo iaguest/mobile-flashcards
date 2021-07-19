@@ -26,11 +26,12 @@ class Deck extends React.Component {
     navigation.goBack();
   }
   render() {
-    const { deck } = this.props;
+    const { deck, navigation } = this.props;
     return (
       <View style={styles.container}>
         <DeckInfo name={deck.title} numCards={deck.questions.length}/>
         <TouchableOpacity
+          onPress={() => navigation.navigate('Add Card', { id: deck.title })}
           style={styles.button}>
             <Text style={styles.buttonText}>Add Card</Text>
         </TouchableOpacity>

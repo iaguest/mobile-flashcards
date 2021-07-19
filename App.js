@@ -5,6 +5,7 @@ import reducer from './reducers'
 import AddDeck from './components/AddDeck';
 import Decks from './components/Decks'
 import Deck from './components/Deck'
+import AddCard from './components/AddCard'
 import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -75,6 +76,10 @@ export default class App extends React.Component {
               name="Deck"
               component={Deck}
               options={{headerTitleAlign: 'center'}}/>
+            <Stack.Screen
+              name="Add Card"
+              component={AddCard}
+              options={{headerTitleAlign: 'center'}}/>              
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
