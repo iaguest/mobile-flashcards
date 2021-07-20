@@ -14,12 +14,12 @@ class AddDeck extends Component {
   state = {
     titleInput: '',
   }
-  handleTitleChange = (titleInput) => {
+  onTitleChange = (titleInput) => {
     this.setState((prevState) => ({
       titleInput,
     }));
   }
-  handleCreateDeck = () => {
+  onCreateDeck = () => {
     const { dispatch } = this.props;
     dispatch(handleAddDeck(makeNewDeck(this.state.titleInput)));
     this.setState((prevState) => ({
@@ -37,14 +37,17 @@ class AddDeck extends Component {
     const isButtonEnabled = this.isCreateButtonEnabled();
     return (
       <View style={styles.container}>
-        <Text style={styles.titleText}>What is the title of your new deck?</Text>
-        <TextInput
-          value={titleInput}
-          style={styles.titleInput}
-          onChangeText={this.handleTitleChange}
-        />
+        <View style={styles.titleGroup}>
+          <Text style={styles.titleText}>What is the title of your new deck?</Text>
+          <TextInput
+            value={titleInput}
+            style={styles.textInput}
+            placeholder="Deck Title"
+            onChangeText={this.onTitleChange}
+          />
+        </View>
         <TouchableOpacity
-          onPress={this.handleCreateDeck}
+          onPress={this.onCreateDeck}
           style={[styles.button, {opacity: (isButtonEnabled ? 1 : 0.5)}]}
           disabled={!isButtonEnabled}>
             <Text style={styles.buttonText}>
@@ -62,11 +65,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     padding: 20,
   },
+  titleGroup: {
+    flex: 1,
+    justifyContent: 'flex-start'
+  },
   titleText: {
     fontSize: 25,
     textAlign: 'center',
   },
-  titleInput: {
+  textInput: {
     borderWidth: 1,
     margin: 20,
     padding: 8,
@@ -77,6 +84,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginLeft: 50,
     marginRight: 50, 
+    marginBottom: 50,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
