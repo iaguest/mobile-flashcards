@@ -1,4 +1,9 @@
-import { getDecks, saveDeckTitle, removeDeck } from '../utils/api'
+import {
+  getDecks,
+  saveDeckTitle,
+  removeDeck,
+  addCardToDeck
+} from '../utils/api'
 
 export const RECEIVE_DECKS = 'RECEIVE_DECKS';
 export const ADD_DECK = 'ADD_DECK';
@@ -47,10 +52,17 @@ export function handleDeleteDeck(id) {
   };
 }
 
-export function addCard(id, card) {
+function addCard(id, card) {
   return {
     type: ADD_CARD,
     id,
     card
+  }
+}
+
+export function handleAddCard(id, card) {
+  return async (dispatch) => {
+    dispatch(addCard(id, card));
+    addCardToDeck(id, card);
   }
 }

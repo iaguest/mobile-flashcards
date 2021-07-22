@@ -62,8 +62,7 @@ export async function saveDeckTitle(title) {
 // take in two arguments, title and card, and will add the card to the list of questions for the deck with the associated title.
 export async function addCardToDeck(title, card) {
   let deck = await getDeck(title);
-  const { question, answer } = card;
-  deck.questions.push({question, answer});
+  deck.questions.push(card);
   return await AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
     [title]: deck,
   }))

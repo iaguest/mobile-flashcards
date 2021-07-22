@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import { handleAddCard } from '../actions'
+import { makeCard } from '../utils/deckHelper';
 import {
   StyleSheet,
   Text,
@@ -25,9 +27,13 @@ class AddCard extends Component {
     }))
   }
   onSubmit = () => {
-    const { dispatch } = this.props;
-    // TODO: dispatch add card action
-    // TODO: reset text input states
+    const { dispatch, id } = this.props;
+    const { questionInput, answerInput } = this.state;
+    dispatch(handleAddCard(id, makeCard(questionInput, answerInput)));
+    this.setState((prevState) => ({
+      questionInput: '',
+      answerInput: ''
+    }))
   }
   isSubmitButtonEnabled = () => {
     return (
