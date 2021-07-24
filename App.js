@@ -6,6 +6,7 @@ import AddDeck from './components/AddDeck';
 import Decks from './components/Decks'
 import Deck from './components/Deck'
 import AddCard from './components/AddCard'
+import Quiz from './components/Quiz'
 import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -79,7 +80,11 @@ export default class App extends React.Component {
             <Stack.Screen
               name="Add Card"
               component={AddCard}
-              options={{headerTitleAlign: 'center'}}/>              
+              options={{headerTitleAlign: 'center'}}/>
+            <Stack.Screen
+              name="Quiz"
+              component={Quiz}
+              options={{headerTitleAlign: 'center'}}/>         
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
