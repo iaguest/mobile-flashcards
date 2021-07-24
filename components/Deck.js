@@ -20,10 +20,14 @@ class Deck extends React.Component {
   shouldComponentUpdate(nextProps) {
     return !!nextProps.deck;
   }
-  deleteDeck = (id) => {
-    const { dispatch, navigation } = this.props;
-    dispatch(handleDeleteDeck(id));
+  onPressDelete = () => {
+    const { dispatch, navigation, deck } = this.props;
+    dispatch(handleDeleteDeck(deck.title));
     navigation.goBack();
+  }
+  onPressAddCard = () => {
+    const { navigation, deck } = this.props;
+    navigation.navigate('Add Card', { id: deck.title });
   }
   render() {
     const { deck, navigation } = this.props;
@@ -31,7 +35,7 @@ class Deck extends React.Component {
       <View style={styles.container}>
         <DeckInfo name={deck.title} numCards={deck.questions.length}/>
         <TouchableOpacity
-          onPress={() => navigation.navigate('Add Card', { id: deck.title })}
+          onPress={this.onPressAddCard}
           style={styles.button}>
             <Text style={styles.buttonText}>Add Card</Text>
         </TouchableOpacity>
@@ -41,7 +45,7 @@ class Deck extends React.Component {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
-          onPress={(e) => { this.deleteDeck(deck.title) }}>
+          onPress={this.onPressDelete}>
             <Text style={styles.buttonText}>Delete Deck</Text>
         </TouchableOpacity>
       </View>

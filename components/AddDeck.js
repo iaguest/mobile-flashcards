@@ -37,15 +37,13 @@ class AddDeck extends Component {
     const isButtonEnabled = this.isCreateButtonEnabled();
     return (
       <View style={styles.container}>
-        <View style={styles.titleGroup}>
           <Text style={styles.titleText}>What is the title of your new deck?</Text>
           <TextInput
             value={titleInput}
             style={styles.textInput}
             placeholder="Deck Title"
             onChangeText={this.onTitleChange}
-          />
-        </View>
+            />
         <TouchableOpacity
           onPress={this.onCreateDeck}
           style={[styles.button, {opacity: (isButtonEnabled ? 1 : 0.5)}]}
@@ -62,12 +60,8 @@ class AddDeck extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     padding: 20,
-  },
-  titleGroup: {
-    flex: 1,
-    justifyContent: 'flex-start'
   },
   titleText: {
     fontSize: 25,
