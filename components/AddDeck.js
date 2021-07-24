@@ -20,11 +20,12 @@ class AddDeck extends Component {
     }));
   }
   onCreateDeck = () => {
-    const { dispatch } = this.props;
-    dispatch(handleAddDeck(makeNewDeck(this.state.titleInput)));
+    const id = this.state.titleInput;
+    this.props.dispatch(handleAddDeck(makeNewDeck(id)));
     this.setState((prevState) => ({
       titleInput: '',
     }));
+    this.props.navigation.navigate('Deck', { id });
   }
   isCreateButtonEnabled = () => {
     return (
