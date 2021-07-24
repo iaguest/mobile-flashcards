@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native'
-import { blue, white } from '../colors'
+import { black, white } from '../colors'
 
 class AddCard extends Component {
   state = {
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   button: {
-    backgroundColor: blue,
+    backgroundColor: black,
     padding: 10,
     marginLeft: 50,
     marginRight: 50,

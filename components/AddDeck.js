@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View } from 'react-native'
 import { connect } from 'react-redux';
-import { blue, white } from '../colors'
+import { black, white } from '../colors'
 
 class AddDeck extends Component {
   state = {
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   button: {
-    backgroundColor: blue,
+    backgroundColor: black,
     padding: 10,
     marginLeft: 50,
     marginRight: 50, 
