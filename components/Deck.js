@@ -35,23 +35,34 @@ class Deck extends React.Component {
   }
   render() {
     const { deck, navigation } = this.props;
+    const numQuestions = deck.questions.length;
+    const isStartQuizEnabled = numQuestions > 0;
     return (
       <View style={styles.container}>
-        <DeckInfo name={deck.title} numCards={deck.questions.length}/>
+        <DeckInfo name={deck.title} numCards={numQuestions}/>
         <TouchableOpacity
           style={[styles.button, {backgroundColor: black}]}
           onPress={this.onPressAddCard}>
-            <Text style={[styles.buttonText, {color: white}]}>Add Card</Text>
+            <Text style={[styles.buttonText, {color: white}]}>
+                Add Card
+            </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.button, {backgroundColor: white, borderColor: black, borderWidth:1}]}
-          onPress={this.onPressStartQuiz}>
-            <Text style={[styles.buttonText, {color: black}]}>Start Quiz</Text>
+          style={[styles.button,
+            {backgroundColor: white, borderColor: black, borderWidth:1,
+              opacity: (isStartQuizEnabled ? 1 : 0.3)}]}
+          onPress={this.onPressStartQuiz}
+          disabled={!isStartQuizEnabled}>
+            <Text style={[styles.buttonText, {color: black}]}>
+                Start Quiz
+            </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
           onPress={this.onPressDelete}>
-            <Text style={[styles.buttonText, {color: red}]}>Delete Deck</Text>
+            <Text style={[styles.buttonText, {color: red}]}>
+                Delete Deck
+            </Text>
         </TouchableOpacity>
       </View>
     );
