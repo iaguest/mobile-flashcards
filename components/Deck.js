@@ -79,9 +79,9 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 10,
-    marginTop: 20,
+    marginTop: 40,
     marginLeft: 50,
-    marginRight: 50, 
+    marginRight: 50,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,

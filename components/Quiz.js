@@ -20,12 +20,23 @@ class Quiz extends React.Component {
       isShowingQuestion: !this.state.isShowingQuestion
     }));
   }
-  onButtonPress = (points) => {
+  onPressResult = (points) => {
     this.setState((prevState) => ({
       correctCount: prevState.correctCount + points,
       qIndex: prevState.qIndex + 1,
       isShowingQuestion: true
     }));
+  }
+  onPressRestart = () => {
+    this.setState((prevState) => ({
+      qIndex: 0,
+      isShowingQuestion: true,
+      correctCount: 0
+    }));
+  }
+  onPressReturn = () => {
+    const { navigation, id } = this.props;
+    navigation.goBack();
   }
   scorePercent = () => {
     return (
@@ -38,7 +49,7 @@ class Quiz extends React.Component {
     const numQuestions = questions.length;
     return ((qIndex !== numQuestions) ? (
         <View style={styles.container}>
-          <Text>
+          <Text style={{color:'black', fontSize: 15}}>
             {`${qIndex + 1}/${numQuestions}`}
           </Text>
           <Text style={styles.questionAnswerText}>
@@ -53,14 +64,14 @@ class Quiz extends React.Component {
           </TouchableOpacity>
           <View>
             <TouchableOpacity
-              onPress={() => this.onButtonPress(1)}
+              onPress={() => this.onPressResult(1)}
               style={[styles.button, {backgroundColor: green}]}>
                 <Text style={styles.buttonText}>
                   Correct
                 </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => this.onButtonPress(0)}
+              onPress={() => this.onPressResult(0)}
               style={[styles.button, {backgroundColor: red}]}>
                 <Text style={styles.buttonText}>
                   Incorrect
@@ -79,6 +90,22 @@ class Quiz extends React.Component {
               <AntDesign style={styles.icon} name="star" size={50} color={gold} />
             )
           }
+          <View style={{marginTop:50}}>
+              <TouchableOpacity
+                onPress={this.onPressRestart}
+                style={[styles.button, {backgroundColor: black}]}>
+                  <Text style={styles.buttonText}>
+                    Restart
+                  </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={this.onPressReturn}
+                style={[styles.button, {backgroundColor: white}]}>
+                  <Text style={[styles.buttonText, {color:black}]}>
+                    Return to Deck
+                  </Text>
+              </TouchableOpacity>
+            </View>
         </View>
       )
     );
@@ -114,6 +141,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
+    borderColor: black,
+    borderWidth: 1
   },
   buttonText: {
     fontSize: 20,
@@ -121,7 +150,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     textAlign:'center',
-    padding: 10
+    padding: 20
   }
 })
 
