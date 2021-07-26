@@ -19,13 +19,14 @@ class Decks extends React.Component {
       ready: true
     }));
   }
-  renderItem({item}, navigation) {
-    return (
-      <TouchableOpacity onPress={() => navigation.navigate('Deck', { id: item.title })}>
+  onPressDeck = (item) => {
+    this.props.navigation.navigate('Deck', { id: item.title });
+  }
+  renderItem = ({item}) => (
+      <TouchableOpacity onPress={() => this.onPressDeck(item)}>
         <DeckInfo name={item.title} numCards={item.questions.length} />
       </TouchableOpacity>
-    );
-  }
+  );
   render() {
     if (!this.state.ready) {
       return <AppLoading />;
@@ -35,7 +36,7 @@ class Decks extends React.Component {
       <View>
         <FlatList
           data={this.props.items}
-          renderItem={ (e) => this.renderItem(e, this.props.navigation) }
+          renderItem={ this.renderItem }
           keyExtractor={item => item.title} />
       </View>
     );
