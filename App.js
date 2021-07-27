@@ -17,6 +17,7 @@ import { AntDesign } from '@expo/vector-icons';
 import Constants from 'expo-constants'
 import { white } from './colors'
 import middleware from './middleware'
+import { setLocalNotification } from './utils/notifications'
 
 function AppStatusBar({backgroundColor, ...props}) {
   return (
@@ -61,6 +62,9 @@ function Home(props) {
 }
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
   render() {
     return (
       <Provider store={createStore(reducer, middleware)}>
