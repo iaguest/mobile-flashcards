@@ -4,7 +4,7 @@ import * as Notifications from 'expo-notifications'
 
 const NOTIFICATION_KEY = 'Mobile-Flashcards:notifications'
 
-function secondsUntilEightPM() {
+function secondsUntilEightPmTomorrow() {
   let tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
   tomorrow.setHours(20);
@@ -34,7 +34,7 @@ export function setLocalNotification() {
                   },
                   trigger: {
                     // seconds: 30,
-                    seconds: secondsUntilEightPM(),
+                    seconds: secondsUntilEightPmTomorrow(),
                     repeats: false,
                   }
                 });
