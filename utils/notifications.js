@@ -1,11 +1,10 @@
 import React from 'react'
 import { AsyncStorage } from 'react-native'
-import * as Permissions from 'expo-permissions';
 import * as Notifications from 'expo-notifications'
 
 const NOTIFICATION_KEY = 'Mobile-Flashcards:notifications'
 
-function secondsUntilNextAlarm() {
+function secondsUntilEightPM() {
   let tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
   tomorrow.setHours(20);
@@ -23,7 +22,7 @@ export function setLocalNotification() {
     .then(JSON.parse)
     .then((data) => {
       if (data === null) {
-          Permissions.askAsync(Permissions.NOTIFICATIONS)
+          Notifications.requestPermissionsAsync()
             .then(({status})=> {
               if (status === 'granted') {
                 Notifications.cancelAllScheduledNotificationsAsync();
@@ -34,8 +33,8 @@ export function setLocalNotification() {
                     sound: true
                   },
                   trigger: {
-                    //seconds: secondsUntilNextAlarm(),
-                    seconds: 10,
+                    // seconds: 30,
+                    seconds: secondsUntilEightPM(),
                     repeats: false,
                   }
                 });

@@ -8,6 +8,7 @@ import {
 } from 'react-native'
 import { green, red, white, black, gold } from '../colors'
 import { AntDesign } from '@expo/vector-icons';
+import { clearLocalNotification, setLocalNotification } from '../utils/notifications'
 
 class Quiz extends React.Component {
   state = {
@@ -20,7 +21,13 @@ class Quiz extends React.Component {
       isShowingQuestion: !this.state.isShowingQuestion
     }));
   }
+  isLastQuestion = () => {
+    return this.state.qIndex === this.props.questions.length - 1;
+  }
   onPressResult = (points) => {
+    if (this.isLastQuestion()) {
+      clearLocalNotification().then(setLocalNotification);
+    }
     this.setState((prevState) => ({
       correctCount: prevState.correctCount + points,
       qIndex: prevState.qIndex + 1,
@@ -35,7 +42,7 @@ class Quiz extends React.Component {
     }));
   }
   onPressReturn = () => {
-    const { navigation, id } = this.props;
+    const { navigation } = this.props;
     navigation.goBack();
   }
   scorePercent = () => {
@@ -47,7 +54,8 @@ class Quiz extends React.Component {
     const { questions } = this.props;
     const { qIndex, isShowingQuestion: isShowQuestion } = this.state;
     const numQuestions = questions.length;
-    return ((qIndex !== numQuestions) ? (
+    const isContinueQuiz = qIndex !== numQuestions;
+    return ((isContinueQuiz) ? (
         <View style={styles.container}>
           <Text style={{color:'black', fontSize: 15}}>
             {`${qIndex + 1}/${numQuestions}`}
