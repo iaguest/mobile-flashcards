@@ -10,5 +10,6 @@ To test the application:
 * install all project dependencies with `yarn install`
 * start the test server with `yarn start`
 
-## Screenshots
+## screenshots
 
+![alt-text-1](screenshots/android/decks.png?raw=true "Image 1") ![alt-text-2](screenshots/ios/decks.png?raw=true "Image 2")
