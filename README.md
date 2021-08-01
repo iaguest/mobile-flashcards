@@ -8,7 +8,15 @@ This app was built using react-native.
 To test the application:
 
 * install all project dependencies with `yarn install`
-* start the test server with `yarn start`
+* start the test server with `yarn start` or `expo start`
+
+## platforms tested
+
+The application was tested on:
+
+* Nexus 5X API 30 Android Emulator
+* Motorola g6 physical device
+* iPhone 11 (iOS 14.5) Emulator
 
 ## screenshots on ios and android
 
