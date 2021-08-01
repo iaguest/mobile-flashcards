@@ -1,7 +1,9 @@
 # mobile-flashcards
-A mobile application for Android and iOS that allows users to study collections of flashcards. The app allows users to create different categories of flashcards called "decks", to add flashcards to those decks and then take quizzes on those decks.
+This is my submission for the final project of the Udacity React Nanodegree.
 
-This app was built using react-native.
+It is a mobile application for Android and iOS that allows users to study collections of flashcards. The app allows users to create different categories of flashcards called "decks", to add flashcards to those decks and then take quizzes on those decks.
+
+The app was built using react-native and redux.
 
 ## installation
 
